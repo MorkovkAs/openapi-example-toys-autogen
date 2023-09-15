@@ -1,10 +1,10 @@
 # OpenAPI Contract First  Example Project
 
-This is a project containing an OpenAPI specification according to which API classes are automatically generated during each compilation to help you to create your own Rest service simpler. It demonstrates Contract First approach.
+This is a project containing an OpenAPI specification according to which API classes are automatically generated during each compilation to help you create your own Rest service simpler. It demonstrates Contract First approach.
 
 ## Installation
 
-Check [Gradle](https://gradle.org/) is installed and configured
+Check [Gradle](https://gradle.org/) is installed and configured.
 
 Clone the source locally:
 ```
@@ -18,7 +18,9 @@ $ ./gradlew build bootRun
 Go to [localhost](http://localhost:8080/swagger-ui/index.html) page to see Swagger UI with Toys shop OpenAPI specification. Methods createToy, getToyById and deleteToyById have custom realizations. Others haven't. So http code 501 (NOT_IMPLEMENTED) will return.
 
 ## Details
-Generated classes are located in `build/generated/openapi/src`.
+OpenAPI specification is located [here](src/main/resources/static/toys.yaml).
+
+Generated classes by OpenAPI specification will be located after compilation in `build/generated/openapi/src`.
 
 To use generated code you should create your custom controller which implements a generated one. See [ToysController](src/main/kotlin/ru/morkovka/openapi/test/controller/ToysController.kt) class.
 
