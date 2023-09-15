@@ -1,0 +1,87 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.10'
+    id "org.jetbrains.kotlin.plugin.spring" version "1.9.10"
+    id "org.springframework.boot" version "2.7.0"
+    id 'org.openapi.generator' version "7.0.0"
+    id 'maven-publish'
+}
+
+group = 'ru.morkovka.openapi'
+version = '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    enabled = true
+    archiveVersion = '0.0.1'
+}
+
+jar {
+    enabled = true
+}
+
+dependencies {
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.9.10'
+
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.0'
+
+    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.20'
+    implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+    implementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.13.3'
+
+    implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '17'
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '17'
+}
+
+var spec = "$rootDir/src/main/resources/static/toys.yaml"
+var generatedSourcesDir = "$buildDir/generated/openapi"
+
+// https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-gradle-plugin#configuration
+openApiGenerate {
+    generatorName.set("kotlin-spring")
+    inputSpec.set(spec)
+    outputDir.set(generatedSourcesDir)
+    apiPackage.set("ru.morkovka.openapi.gen.api")
+    invokerPackage.set("ru.morkovka.openapi.gen.handler")
+    modelPackage.set("ru.morkovka.openapi.gen.model")
+    configOptions.set([
+            dateLibrary  : "java8",
+            interfaceOnly: "true"
+    ])
+}
+
+sourceSets {
+    getByName("main") {
+        java {
+            srcDir("$generatedSourcesDir/src/main/kotlin")
+        }
+    }
+}
+
+tasks {
+    // Генерация кода по openapi спецификации
+    compileKotlin.dependsOn tasks.openApiGenerate
+}

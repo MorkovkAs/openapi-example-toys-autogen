@@ -1,0 +1,8 @@
+spring.application.name: openapi-test
+server:
+  servlet:
+    context-path: /
+
+springdoc:
+  swagger-ui:
+    url: /toys.yaml
