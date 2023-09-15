@@ -15,7 +15,7 @@ Build and run project:
 $ cd openapi-example-toys-autogen/
 $ ./gradlew build bootRun
 ```
-Go to [localhost](http://localhost:8080/swagger-ui/index.html) page to see Swagger UI with Toys shop OpenAPI specification.
+Go to [localhost](http://localhost:8080/swagger-ui/index.html) page to see Swagger UI with Toys shop OpenAPI specification. Methods createToy, getToyById and deleteToyById have custom realizations. Others haven't. So http code 501 (NOT_IMPLEMENTED) will return.
 
 ## Details
 Generated classes are located in `build/generated/openapi/src`.
