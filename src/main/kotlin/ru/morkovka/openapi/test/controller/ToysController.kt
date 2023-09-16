@@ -27,7 +27,7 @@ class ToysController(
         return if (toysMap.containsKey(id)) {
             toysMap.remove(id)
 
-            return ResponseEntity.noContent().build()
+            ResponseEntity.noContent().build()
         } else
             ResponseEntity.notFound().build()
     }

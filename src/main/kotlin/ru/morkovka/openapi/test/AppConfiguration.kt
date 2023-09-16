@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
 @ComponentScan(basePackages = ["ru.morkovka.openapi.gen.*", "ru.morkovka.openapi.test"])
-open class AppConfiguration(
+class AppConfiguration(
 ) : WebMvcConfigurer {
 
 }

@@ -24,11 +24,7 @@ jar {
 
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.0'
-    implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
-}
-
-test {
-    useJUnitPlatform()
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
 }
 
 compileKotlin {
