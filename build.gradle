@@ -1,20 +1,13 @@
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-    }
-}
-
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.10'
+    //It makes kotlin generated classes open
     id "org.jetbrains.kotlin.plugin.spring" version "1.9.10"
     id "org.springframework.boot" version "2.7.0"
     id 'org.openapi.generator' version "7.0.0"
-    id 'maven-publish'
 }
 
 group = 'ru.morkovka.openapi'
-version = '0.0.1'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -22,7 +15,7 @@ repositories {
 
 bootJar {
     enabled = true
-    archiveVersion = '0.0.1'
+    archiveVersion = '1.0.0'
 }
 
 jar {
@@ -30,18 +23,8 @@ jar {
 }
 
 dependencies {
-    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.9.10'
-
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.0'
-
-    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.20'
-    implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
-
-    implementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.13.3'
-
     implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
-
-    testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
 
 test {
