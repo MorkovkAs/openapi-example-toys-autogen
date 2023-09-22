@@ -37,6 +37,7 @@ compileTestKotlin {
 
 var spec = "$rootDir/src/main/resources/static/toys.yaml"
 var generatedSourcesDir = "$buildDir/generated/openapi"
+var generatedSpecDir = "$buildDir/resources/main/static/prod"
 
 // https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-gradle-plugin#configuration
 openApiGenerate {
@@ -53,12 +54,14 @@ openApiGenerate {
 }
 
 task generateOpenApiSpecForProd(type: Copy) {
-    delete "src/main/resources/static/prod/"
+    delete generatedSpecDir
+
+    from 'src/main/resources/static/'
+    into generatedSpecDir
 
     include '*.yaml'
     includeEmptyDirs = false
-    from 'src/main/resources/static/'
-    into 'src/main/resources/static/prod/'
+
     filter { String line -> (line.contains('externalDocs') || line.contains('github.com/MorkovkAs')) ? '' : line }
     rename { String filename ->
         return filename.substring(0, filename.indexOf(".yaml")) + "-prod.yaml"
