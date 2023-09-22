@@ -18,6 +18,9 @@ tags:
   - name: Toy
     description: "All methods about Toys"
 
+externalDocs:
+  url: https://github.com/MorkovkAs/openapi-example-toys-autogend
+
 paths:
   /toys:
     get:

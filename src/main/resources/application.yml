@@ -5,4 +5,5 @@ server:
 
 springdoc:
   swagger-ui:
-    url: /toys.yaml
+#    url: /toys.yaml
+    url: /prod/toys-prod.yaml

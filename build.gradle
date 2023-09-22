@@ -52,6 +52,19 @@ openApiGenerate {
     ])
 }
 
+task generateOpenApiSpecForProd(type: Copy) {
+    delete "src/main/resources/static/prod/"
+
+    include '*.yaml'
+    includeEmptyDirs = false
+    from 'src/main/resources/static/'
+    into 'src/main/resources/static/prod/'
+    filter { String line -> (line.contains('externalDocs') || line.contains('github.com/MorkovkAs')) ? '' : line }
+    rename { String filename ->
+        return filename.substring(0, filename.indexOf(".yaml")) + "-prod.yaml"
+    }
+}
+
 sourceSets {
     getByName("main") {
         java {
@@ -63,4 +76,7 @@ sourceSets {
 tasks {
     // Генерация кода по openapi спецификации
     compileKotlin.dependsOn tasks.openApiGenerate
+
+    // Генерация схемы для прода
+    compileKotlin.dependsOn tasks.generateOpenApiSpecForProd
 }

@@ -14,7 +14,7 @@ import java.util.*
 class ToysController(
     val mapper: BiDirectionalMapper<ToyDto, Toy>
 ) : ToysApi {
-    var toysMap = HashMap<UUID, ToyDto>()
+    val toysMap = HashMap<UUID, ToyDto>()
 
     override fun createToy(toy: Toy): ResponseEntity<Toy> {
         val toyDto = mapper.mapEntity(toy)
